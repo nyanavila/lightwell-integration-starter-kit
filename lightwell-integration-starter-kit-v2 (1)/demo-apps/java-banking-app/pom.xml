@@ -1,0 +1,55 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example.banking</groupId>
+    <artifactId>wire-transfer-service</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>Wire Transfer Payment Service (PCI-Regulated)</name>
+    <description>Demonstrates seamless drop-in resolution of Lightwell .rhlw-#### security patches</description>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        
+        <!-- Pinned dependencies resolved via Lightwell Remediated Repository -->
+        <commons-io.version>2.11.0.rhlw-00001</commons-io.version>
+        <httpclient.version>4.5.12.rhlw-00001</httpclient.version>
+        <jackson.version>2.13.4.rhlw-00001</jackson.version>
+    </properties>
+
+    <dependencies>
+        <!-- Apache Commons IO: Patched without breaking method signatures -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+
+        <!-- Apache HttpClient: Pinned legacy 4.5.x secured via Lightwell backport -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>${httpclient.version}</version>
+        </dependency>
+
+        <!-- Jackson Databind: Secured deserialization backport -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>

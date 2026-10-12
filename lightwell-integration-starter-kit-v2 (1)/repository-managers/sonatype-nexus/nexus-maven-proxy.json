@@ -1,0 +1,28 @@
+{
+  "name": "redhat-lightwell-maven-proxy",
+  "format": "maven2",
+  "type": "proxy",
+  "url": "https://packages.example.com/lightwell/maven/remediated/",
+  "online": true,
+  "storage": {
+    "blobStoreName": "default",
+    "strictContentTypeValidation": true
+  },
+  "httpClient": {
+    "blocked": false,
+    "autoBlock": true,
+    "connection": {
+      "retries": 2,
+      "timeout": 30
+    },
+    "authentication": {
+      "type": "username",
+      "username": "${LIGHTWELL_SERVICE_ACCOUNT_ID}",
+      "password": "${LIGHTWELL_REGISTRY_TOKEN}"
+    }
+  },
+  "maven": {
+    "versionPolicy": "RELEASE",
+    "layoutPolicy": "PERMISSIVE"
+  }
+}

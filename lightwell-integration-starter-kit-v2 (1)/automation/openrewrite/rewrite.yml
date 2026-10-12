@@ -1,0 +1,20 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.redhat.lightwell.UpgradeToRemediated
+displayName: Auto-Migrate Pinned Dependencies to Red Hat Lightwell Remediated Patches
+description: Automatically scans Maven POMs and bumps vulnerable dependencies to the corresponding .rhlw-#### patch release.
+recipeList:
+  - org.openrewrite.maven.ChangeDependencyGroupIdAndArtifactId:
+      oldGroupId: commons-io
+      oldArtifactId: commons-io
+      newGroupId: commons-io
+      newArtifactId: commons-io
+      newVersion: 2.11.0.rhlw-00001
+  - org.openrewrite.maven.UpgradeDependencyVersion:
+      groupId: org.apache.httpcomponents
+      artifactId: httpclient
+      newVersion: 4.5.12.rhlw-00001
+  - org.openrewrite.maven.UpgradeDependencyVersion:
+      groupId: com.fasterxml.jackson.core
+      artifactId: jackson-databind
+      newVersion: 2.13.4.rhlw-00001
