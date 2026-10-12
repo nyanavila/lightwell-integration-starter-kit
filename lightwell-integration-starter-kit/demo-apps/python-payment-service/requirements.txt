@@ -1,0 +1,4 @@
+# Pinned production dependencies hardened by Red Hat Lightwell
+flask==2.2.5.rhlw-00001
+urllib3==1.26.18.rhlw-00001
+cryptography==41.0.7.rhlw-00001

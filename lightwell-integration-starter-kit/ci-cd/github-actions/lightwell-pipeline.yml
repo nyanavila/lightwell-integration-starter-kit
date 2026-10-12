@@ -1,0 +1,33 @@
+name: Lightwell Secure CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build Application with Lightwell Remediated Dependencies
+        env:
+          LIGHTWELL_SERVICE_ACCOUNT_ID: ${{ vars.LIGHTWELL_SERVICE_ACCOUNT_ID }}
+          LIGHTWELL_REGISTRY_TOKEN: ${{ vars.LIGHTWELL_REGISTRY_TOKEN }}
+        run: |
+          echo "Building Java application with Lightwell settings..."
+          mvn clean package -s build-tools/java/maven-settings.xml -f demo-apps/java-banking-app/pom.xml
+
+      - name: Verify SLSA Level 3 Provenance & Sigstore Attestations
+        run: |
+          chmod +x scripts/verify-java-provenance.sh
+          ./scripts/verify-java-provenance.sh --group commons-io --artifact commons-io --version 2.11.0.rhlw-00001

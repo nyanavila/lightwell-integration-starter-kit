@@ -1,0 +1,11 @@
+{
+  "key": "redhat-lightwell-pypi-remote",
+  "packageType": "pypi",
+  "description": "Remote proxy cache for Red Hat Lightwell PyPI Remediated repository",
+  "url": "https://packages.example.com/api/pypi/lightwell/remediated/simple/",
+  "username": "${LIGHTWELL_SERVICE_ACCOUNT_ID}",
+  "password": "${LIGHTWELL_REGISTRY_TOKEN}",
+  "pypiRegistryUrl": "https://packages.example.com/api/pypi/lightwell/remediated/",
+  "listRemoteFolderItems": true,
+  "retrievalCachePeriodSecs": 43200
+}
